@@ -129,27 +129,27 @@ streamlit run app/app.py
 ## Screenshots
 
 ### Dashboard Overview
-<img src="visuals/dashboard_overview.png" width="850">
+<img src="visuals/dashboard_overview.svg" width="850">
 
 The dashboard overview highlights dataset size, model accuracy, TF-IDF feature count, business value, category distribution, and priority distribution.
 
 ### Ticket Triage
-<img src="visuals/ticket_triage.png" width="850">
+<img src="visuals/ticket_triage.svg" width="850">
 
 The ticket triage page analyzes a support request and displays the predicted category, priority level, SLA guidance, suggested support team, urgency explanation, and first-response draft.
 
 ### Model Performance
-<img src="visuals/model_performance.png" width="850">
+<img src="visuals/model_performance.svg" width="850">
 
 The model performance page summarizes category accuracy, priority accuracy, dataset details, TF-IDF features, and classification reports.
 
 ### Dataset Explorer
-<img src="visuals/dataset_explorer.png" width="850">
+<img src="visuals/dataset_explorer.svg" width="850">
 
 The dataset explorer provides sample records, dataset shape, column information, category counts, and priority distribution insights.
 
 ### About Project
-<img src="visuals/about_project.png" width="850">
+<img src="visuals/about_project.svg" width="850">
 
 The about page explains the problem statement, machine learning workflow, technology stack, and expected business impact of the support automation system.
 
