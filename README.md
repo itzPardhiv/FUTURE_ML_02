@@ -126,16 +126,11 @@ streamlit run app/app.py
 
 ## Screenshots
 
-Add polished screenshots to the `visuals/` folder to improve the GitHub presentation.
-
-<!-- Example image references:
 ![Dashboard Overview](visuals/dashboard-overview.png)
 ![Ticket Triage Result](visuals/ticket-triage-result.png)
 ![Model Performance](visuals/model-performance.png)
 ![Dataset Explorer](visuals/dataset-explorer.png)
-![Category Distribution](visuals/category-distribution.png)
-![Priority Distribution](visuals/priority-distribution.png)
--->
+![About Project](visuals/about-project.png)
 
 ## Results and Business Impact
 
