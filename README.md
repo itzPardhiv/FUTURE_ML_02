@@ -134,7 +134,7 @@ streamlit run app/app.py
 The dashboard overview highlights dataset size, model accuracy, TF-IDF feature count, business value, category distribution, and priority distribution.
 
 ### Ticket Triage
-<img src="visuals/ticket_triage_result.png" width="850">
+<img src="visuals/ticket_triage.png" width="850">
 
 The ticket triage page analyzes a support request and displays the predicted category, priority level, SLA guidance, suggested support team, urgency explanation, and first-response draft.
 
