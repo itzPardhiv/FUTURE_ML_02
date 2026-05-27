@@ -61,696 +61,6 @@ SAMPLE_TICKETS = {
     ),
 }
 
-TEXT_COLUMN_CANDIDATES = ["Document", "Ticket", "Description", "Text", "Issue", "Summary"]
-CATEGORY_COLUMN_CANDIDATES = ["Topic_group", "Category", "Label", "Department", "Class"]
-PRIORITY_COLUMN_CANDIDATES = ["Priority"]
-
-HIGH_PRIORITY_KEYWORDS = [
-    "urgent",
-    "critical",
-    "down",
-    "outage",
-    "unable",
-    "failed",
-    "security",
-    "production",
-    "immediately",
-]
-
-MEDIUM_PRIORITY_KEYWORDS = [
-    "issue",
-    "error",
-    "problem",
-    "request",
-    "access",
-    "slow",
-    "not working",
-]
-
-LOW_PRIORITY_KEYWORDS = [
-    "information",
-    "query",
-    "general",
-    "update",
-    "change",
-    "minor",
-]
-
-ROUTING_RULES = [
-    ("access", "Identity & Access Management Team"),
-    ("hardware", "Hardware Support Team"),
-    ("hr support", "HR Operations Team"),
-    ("human resources", "HR Operations Team"),
-    ("administrative rights", "IT Admin Support Team"),
-    ("admin rights", "IT Admin Support Team"),
-    ("internal project", "Internal Tools Team"),
-    ("project", "Internal Tools Team"),
-    ("purchase", "Procurement Support Team"),
-    ("procurement", "Procurement Support Team"),
-    ("storage", "Infrastructure & Storage Team"),
-    ("cloud", "Infrastructure & Storage Team"),
-]
-
-PRIORITY_SLA_RULES = {
-    "high": {
-        "label": "High",
-        "guidance": "Immediate attention required. Suggested SLA: 2-4 hours.",
-        "response_target": "2-4 hours",
-        "resolution_target": "Same business day",
-    },
-    "medium": {
-        "label": "Medium",
-        "guidance": "Standard support queue. Suggested SLA: 24 hours.",
-        "response_target": "24 hours",
-        "resolution_target": "1 business day",
-    },
-    "low": {
-        "label": "Low",
-        "guidance": "Non-critical request. Suggested SLA: 2-3 business days.",
-        "response_target": "2-3 business days",
-        "resolution_target": "3 business days",
-    },
-}
-
-TONE_MAP = {
-    "blue": "tone-blue",
-    "cyan": "tone-cyan",
-    "green": "tone-green",
-    "amber": "tone-amber",
-    "red": "tone-red",
-    "neutral": "tone-neutral",
-}
-
-PALETTE = {
-    "bg": "#071227",
-    "sidebar": "#05111D",
-    "text": "#E6EEF8",
-    "muted": "#94A3B8",
-    "card": "#071527",
-    "border": "rgba(255,255,255,0.06)",
-    "blue": "#2563EB",
-    "cyan": "#0891B2",
-    "green": "#16A34A",
-    "amber": "#F59E0B",
-    "red": "#DC2626",
-}
-
-st.set_page_config(
-    page_title=f"{PROJECT_NAME} — {PROJECT_TAGLINE}",
-    page_icon="📩",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-px.defaults.template = "plotly_dark"
-
-
-# -----------------------------------------------------------------------------
-# Styling
-# -----------------------------------------------------------------------------
-
-def inject_css():
-    st.markdown(
-        """
-        <style>
-            :root {
-                --bg: #F6F8FC;
-                --sidebar: #07111F;
-                --sidebar-2: #0B1220;
-                --text: #0F172A;
-                --muted: #64748B;
-                --card: #FFFFFF;
-                --border: #E2E8F0;
-                --blue: #2563EB;
-                --cyan: #0891B2;
-                --green: #16A34A;
-                --amber: #F59E0B;
-                --red: #DC2626;
-                --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-                --radius: 16px;
-                --radius-sm: 14px;
-                --content-max: 1240px;
-            }
-
-            html, body, [class*="css"] {
-                font-family: Inter, "Segoe UI", Arial, sans-serif;
-            }
-
-            .stApp {
-                background: var(--bg);
-                color: var(--text);
-            }
-
-            .block-container {
-                max-width: var(--content-max);
-                padding-top: 1rem;
-                padding-bottom: 2rem;
-            }
-
-            header[data-testid="stHeader"] {
-                background: transparent;
-                height: 0;
-            }
-
-            #MainMenu, footer {
-                visibility: hidden;
-                display: none;
-            }
-
-            [data-testid="stSidebar"] {
-                background: linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-2) 100%);
-                border-right: 1px solid rgba(255, 255, 255, 0.06);
-            }
-
-            [data-testid="stSidebar"] * {
-                color: #E5EEF9 !important;
-            }
-
-            [data-testid="stSidebar"] .sidebar-shell {
-                padding: 1.15rem 1rem 0.8rem;
-            }
-
-            .brand-block {
-                padding: 0.25rem 0 0.75rem;
-            }
-
-            .brand-name {
-                font-size: 1.45rem;
-                font-weight: 850;
-                letter-spacing: -0.04em;
-                color: #FFFFFF;
-                line-height: 1.05;
-            }
-
-            .brand-subtitle {
-                margin-top: 0.2rem;
-                color: #C7D2FE;
-                font-size: 0.95rem;
-                font-weight: 650;
-            }
-
-            .brand-desc {
-                margin-top: 0.7rem;
-                color: #94A3B8;
-                font-size: 0.86rem;
-                line-height: 1.55;
-            }
-
-            .sidebar-pill {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.35rem;
-                padding: 0.42rem 0.72rem;
-                border-radius: 999px;
-                background: rgba(37, 99, 235, 0.12);
-                color: #DBEAFE !important;
-                border: 1px solid rgba(37, 99, 235, 0.2);
-                font-size: 0.76rem;
-                font-weight: 800;
-                letter-spacing: 0.03em;
-            }
-
-            .sidebar-note {
-                margin-top: 0.9rem;
-                padding-top: 0.95rem;
-                border-top: 1px solid rgba(255, 255, 255, 0.08);
-                color: #94A3B8 !important;
-                font-size: 0.81rem;
-                line-height: 1.55;
-            }
-
-            .sidebar-nav-title {
-                margin: 1rem 0 0.5rem;
-                color: #CBD5E1 !important;
-                font-size: 0.74rem;
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-                font-weight: 800;
-            }
-
-            .hero-card,
-            .content-card,
-            .metric-card,
-            .chart-card,
-            .report-card,
-            .result-tile,
-            .empty-card,
-            .info-card,
-            .email-card,
-            .side-panel-card {
-                background: var(--card);
-                border: 1px solid var(--border);
-                border-radius: var(--radius);
-                box-shadow: var(--shadow);
-            }
-
-            .hero-card {
-                padding: 1.35rem 1.4rem;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .hero-card.hero-accent::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(8, 145, 178, 0.04) 55%, rgba(255, 255, 255, 0.01) 100%);
-                pointer-events: none;
-            }
-
-            .hero-grid {
-                display: grid;
-                grid-template-columns: minmax(0, 1.65fr) auto;
-                gap: 1rem;
-                align-items: start;
-                position: relative;
-                z-index: 1;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-                line-height: 1.05;
-                font-weight: 850;
-                letter-spacing: -0.05em;
-                color: var(--text);
-                margin: 0;
-            }
-
-            .hero-subtitle {
-                margin-top: 0.55rem;
-                max-width: 72ch;
-                color: var(--muted);
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-
-            .hero-meta {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.45rem;
-                align-items: center;
-                justify-content: flex-end;
-            }
-
-            .badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.35rem;
-                padding: 0.36rem 0.72rem;
-                border-radius: 999px;
-                border: 1px solid transparent;
-                font-size: 0.77rem;
-                font-weight: 800;
-                line-height: 1;
-                white-space: nowrap;
-            }
-
-            .pill {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.35rem;
-                padding: 0.36rem 0.72rem;
-                border-radius: 999px;
-                border: 1px solid var(--border);
-                background: #FFFFFF;
-                color: var(--text);
-                font-size: 0.77rem;
-                font-weight: 750;
-                line-height: 1;
-                white-space: nowrap;
-            }
-
-            .tone-blue {
-                background: rgba(37, 99, 235, 0.09);
-                border-color: rgba(37, 99, 235, 0.16);
-                color: #1D4ED8;
-            }
-
-            .tone-cyan {
-                background: rgba(8, 145, 178, 0.09);
-                border-color: rgba(8, 145, 178, 0.16);
-                color: #0E7490;
-            }
-
-            .tone-green {
-                background: rgba(22, 163, 74, 0.1);
-                border-color: rgba(22, 163, 74, 0.16);
-                color: #15803D;
-            }
-
-            .tone-amber {
-                background: rgba(245, 158, 11, 0.12);
-                border-color: rgba(245, 158, 11, 0.18);
-                color: #B45309;
-            }
-
-            .tone-red {
-                background: rgba(220, 38, 38, 0.1);
-                border-color: rgba(220, 38, 38, 0.16);
-                color: #B91C1C;
-            }
-
-            .tone-neutral {
-                background: rgba(100, 116, 139, 0.08);
-                border-color: rgba(100, 116, 139, 0.14);
-                color: #475569;
-            }
-
-            .section-head {
-                display: flex;
-                flex-direction: column;
-                gap: 0.2rem;
-                margin: 0.2rem 0 0.45rem;
-            }
-
-            .section-title {
-                margin: 0;
-                color: var(--text);
-                font-size: 1.45rem;
-                font-weight: 850;
-                letter-spacing: -0.04em;
-                line-height: 1.1;
-            }
-
-            .section-subtitle {
-                margin: 0;
-                color: var(--muted);
-                font-size: 0.93rem;
-                line-height: 1.5;
-            }
-
-            .metric-card {
-                padding: 0.82rem 0.92rem 0.88rem;
-                min-height: 114px;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .metric-card::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 3px;
-                background: linear-gradient(90deg, rgba(37,99,235,1) 0%, rgba(8,145,178,1) 100%);
-            }
-
-            .metric-label {
-                color: var(--muted);
-                font-size: 0.76rem;
-                text-transform: uppercase;
-                letter-spacing: 0.11em;
-                font-weight: 850;
-                margin-bottom: 0.45rem;
-            }
-
-            .metric-value {
-                color: var(--text);
-                font-size: 1.68rem;
-                line-height: 1.02;
-                font-weight: 850;
-                letter-spacing: -0.04em;
-                margin: 0;
-            }
-
-            .metric-caption {
-                margin-top: 0.4rem;
-                color: var(--muted);
-                font-size: 0.83rem;
-                line-height: 1.45;
-            }
-
-            .card-shell {
-                padding: 1rem 1.05rem;
-            }
-
-            .card-title {
-                margin: 0 0 0.3rem;
-                color: var(--text);
-                font-size: 1rem;
-                font-weight: 800;
-                letter-spacing: -0.02em;
-            }
-
-            .card-body {
-                margin: 0;
-                color: var(--muted);
-                font-size: 0.94rem;
-                line-height: 1.58;
-            }
-
-            .business-grid {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 0.9rem;
-            }
-
-            .business-card {
-                padding: 1rem 1.02rem;
-                min-height: 132px;
-            }
-
-            .business-icon {
-                width: 34px;
-                height: 34px;
-                border-radius: 12px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                background: rgba(37, 99, 235, 0.09);
-                color: #1D4ED8;
-                font-size: 0.9rem;
-                font-weight: 850;
-                margin-bottom: 0.7rem;
-            }
-
-            .chart-card {
-                padding: 0.95rem 1rem 0.85rem;
-            }
-
-            .chart-wrap {
-                margin-top: 0.65rem;
-            }
-
-            .result-grid {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 0.75rem;
-            }
-
-            .result-tile {
-                padding: 0.85rem 0.9rem;
-                min-height: 112px;
-            }
-
-            .result-label {
-                color: var(--muted);
-                font-size: 0.76rem;
-                text-transform: uppercase;
-                letter-spacing: 0.11em;
-                font-weight: 850;
-                margin-bottom: 0.4rem;
-            }
-
-            .result-value {
-                color: var(--text);
-                font-size: 1.12rem;
-                line-height: 1.2;
-                font-weight: 850;
-                letter-spacing: -0.03em;
-            }
-
-            .result-caption {
-                margin-top: 0.36rem;
-                color: var(--muted);
-                font-size: 0.82rem;
-                line-height: 1.45;
-            }
-
-            .empty-card {
-                padding: 1.2rem 1.1rem;
-                min-height: 410px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .empty-title {
-                margin: 0.8rem 0 0.3rem;
-                color: var(--text);
-                font-size: 1rem;
-                font-weight: 800;
-            }
-
-            .empty-subtitle {
-                margin: 0;
-                color: var(--muted);
-                font-size: 0.9rem;
-                line-height: 1.5;
-                max-width: 42ch;
-            }
-
-            .side-panel-card {
-                padding: 1rem;
-            }
-
-            .report-card {
-                padding: 1rem 1.05rem;
-            }
-
-            .report-tab-note {
-                color: var(--muted);
-                font-size: 0.88rem;
-                margin-top: 0.15rem;
-            }
-
-            .info-card {
-                padding: 0.95rem 1rem;
-            }
-
-            .email-card {
-                padding: 0.95rem 1rem 1rem;
-            }
-
-            .email-preview {
-                margin-top: 0.7rem;
-                border: 1px solid var(--border);
-                border-radius: 14px;
-                background: linear-gradient(180deg, #FFFFFF 0%, #FBFDFF 100%);
-                padding: 0.95rem 0.98rem;
-                color: #1F2937;
-                font-size: 0.92rem;
-                line-height: 1.62;
-                white-space: pre-wrap;
-                box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
-            }
-
-            .analysis-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-                gap: 0.8rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .analysis-title {
-                margin: 0;
-                color: var(--text);
-                font-size: 1.05rem;
-                font-weight: 850;
-                letter-spacing: -0.03em;
-            }
-
-            .analysis-subtitle {
-                margin-top: 0.18rem;
-                color: var(--muted);
-                font-size: 0.86rem;
-                line-height: 1.45;
-            }
-
-            .analysis-stack {
-                display: grid;
-                gap: 0.9rem;
-            }
-
-            .analysis-top-grid {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 0.75rem;
-            }
-
-            .section-gap {
-                height: 1rem;
-            }
-
-            .status-line {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.45rem;
-                align-items: center;
-            }
-
-            .small-muted {
-                color: var(--muted);
-                font-size: 0.86rem;
-            }
-
-            .table-note {
-                color: var(--muted);
-                font-size: 0.88rem;
-            }
-
-            .stButton > button {
-                border-radius: 14px;
-                border: 1px solid rgba(37,99,235,0.16);
-                background: linear-gradient(180deg, #2F6BFF 0%, #2563EB 100%);
-                color: white;
-                font-weight: 800;
-                padding: 0.72rem 1rem;
-                box-shadow: 0 8px 18px rgba(37, 99, 235, 0.16);
-                transition: transform 0.12s ease, box-shadow 0.12s ease;
-            }
-
-            .stButton > button:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 10px 22px rgba(37, 99, 235, 0.18);
-            }
-
-            .stTextArea textarea,
-            .stTextInput input,
-            .stSelectbox div[data-baseweb="select"] > div,
-            .stMultiSelect div[data-baseweb="select"] > div {
-                border-radius: 14px !important;
-                border-color: #D8E1EC !important;
-                box-shadow: none !important;
-            }
-
-            .stDataFrame, .stTable {
-                border-radius: 14px;
-                overflow: hidden;
-            }
-
-            .stTabs [data-baseweb="tab-list"] {
-                gap: 0.25rem;
-            }
-
-            .stTabs [data-baseweb="tab"] {
-                border-radius: 999px;
-                padding: 0.45rem 0.8rem;
-                background: #F8FAFC;
-                border: 1px solid #E2E8F0;
-                font-weight: 700;
-                color: #334155;
-            }
-
-            .stTabs [aria-selected="true"] {
-                background: rgba(37,99,235,0.1) !important;
-                border-color: rgba(37,99,235,0.18) !important;
-                color: #1D4ED8 !important;
-            }
-
-            .section-divider {
-                height: 1px;
-                background: linear-gradient(90deg, rgba(226,232,240,0), rgba(226,232,240,1), rgba(226,232,240,0));
-                margin: 1rem 0;
-            }
-
-            [data-testid="stSidebar"] .sidebar-footer {
-                margin-top: 1rem;
-                padding-top: 0.9rem;
-                border-top: 1px solid rgba(255,255,255,0.08);
-                color: #94A3B8 !important;
-                font-size: 0.82rem;
-                line-height: 1.5;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
 
 # -----------------------------------------------------------------------------
 # Data and model utilities
@@ -949,6 +259,15 @@ def prediction_payload(ticket_text, artifacts):
 # UI helpers
 # -----------------------------------------------------------------------------
 
+TONE_MAP = {
+    "blue": "tone-blue",
+    "cyan": "tone-cyan",
+    "green": "tone-green",
+    "amber": "tone-amber",
+    "red": "tone-red",
+    "neutral": "tone-neutral",
+}
+
 def tone_class(tone):
     return TONE_MAP.get(str(tone).lower(), "tone-blue")
 
@@ -1032,6 +351,17 @@ def chart_figure(series, title, color_index=0):
 
     chart_df = series.value_counts().reset_index()
     chart_df.columns = ["Label", "Count"]
+    # Build an ordered color list from PALETTE (supports dict or list)
+    if isinstance(PALETTE, dict):
+        color_keys = ["blue", "cyan", "green", "amber", "red", "purple"]
+        palette_list = [PALETTE[k] for k in color_keys if k in PALETTE]
+    else:
+        palette_list = list(PALETTE)
+
+    if not palette_list:
+        palette_list = ["#2563EB", "#0891B2", "#16A34A", "#F59E0B", "#DC2626"]
+
+    color_seq = palette_list[color_index:] + palette_list[:color_index]
 
     fig = px.bar(
         chart_df,
@@ -1039,18 +369,20 @@ def chart_figure(series, title, color_index=0):
         y="Count",
         color="Label",
         title=title,
-        color_discrete_sequence=PALETTE[color_index:] + PALETTE[:color_index],
+        color_discrete_sequence=color_seq,
     )
+
+    # Use dark-friendly defaults for layout when the app is in dark theme
     fig.update_layout(
         showlegend=False,
         height=380,
         margin=dict(l=8, r=8, t=40, b=8),
-        paper_bgcolor="#FFFFFF",
-        plot_bgcolor="#FFFFFF",
-        title_font=dict(size=18, color="#0F172A"),
-        font=dict(color="#334155", size=12),
-        xaxis=dict(title="", tickfont=dict(color="#475569"), gridcolor="#EEF2F7", zeroline=False),
-        yaxis=dict(title="", tickfont=dict(color="#475569"), gridcolor="#EEF2F7", zeroline=False),
+        paper_bgcolor=PALETTE.get("card", "#071527") if isinstance(PALETTE, dict) else "#071527",
+        plot_bgcolor=PALETTE.get("card", "#071527") if isinstance(PALETTE, dict) else "#071527",
+        title_font=dict(size=18, color=PALETTE.get("text", "#E6EEF8") if isinstance(PALETTE, dict) else "#E6EEF8"),
+        font=dict(color=PALETTE.get("muted", "#94A3B8") if isinstance(PALETTE, dict) else "#94A3B8", size=12),
+        xaxis=dict(title="", tickfont=dict(color=PALETTE.get("muted", "#94A3B8") if isinstance(PALETTE, dict) else "#94A3B8"), gridcolor="rgba(255,255,255,0.03)", zeroline=False),
+        yaxis=dict(title="", tickfont=dict(color=PALETTE.get("muted", "#94A3B8") if isinstance(PALETTE, dict) else "#94A3B8"), gridcolor="rgba(255,255,255,0.03)", zeroline=False),
     )
     fig.update_traces(marker_line_width=0, opacity=0.95)
     return fig
@@ -1700,31 +1032,8 @@ def render_about_page():
 
 
 # -----------------------------------------------------------------------------
-# Main app
+# Main app entrypoint is defined at the end of the file.
 # -----------------------------------------------------------------------------
-
-inject_css()
-artifacts, artifact_errors = load_artifacts()
-report = load_report()
-dataset_info = load_dataset()
-selected_page = build_sidebar(artifacts)
-
-if artifact_errors:
-    st.warning(
-        "Some model files could not be loaded. Ticket prediction will be disabled until the artifacts are restored.\n\n"
-        + "\n".join(f"- {error}" for error in artifact_errors)
-    )
-
-if selected_page == "Dashboard Overview":
-    render_overview(report, dataset_info)
-elif selected_page == "Ticket Triage":
-    render_ticket_triage(artifacts)
-elif selected_page == "Model Performance":
-    render_model_page(report)
-elif selected_page == "Dataset Explorer":
-    render_dataset_page(dataset_info)
-elif selected_page == "About Project":
-    render_about_page()
 import html
 import json
 import re
@@ -2761,61 +2070,6 @@ def load_artifacts():
     return artifacts, missing
 
 
-artifacts, artifact_errors = load_artifacts()
-report = load_report()
-dataset_info = load_dataset()
-
-
-if "triage_result" not in st.session_state:
-    st.session_state["triage_result"] = None
-if "ticket_input" not in st.session_state:
-    st.session_state["ticket_input"] = next(iter(SAMPLE_TICKETS.values()))
-
-
-with st.sidebar:
-    st.markdown(
-        f"""
-        <div class="sidebar-wrap">
-            <div class="badge badge-cyan" style="margin-bottom:0.9rem;">NLP Automation</div>
-            <div class="sidebar-title">{PROJECT_NAME}</div>
-            <div class="sidebar-subtitle">{PROJECT_TAGLINE}</div>
-            <div class="sidebar-desc">{PROJECT_SUBTITLE}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    if all(artifacts.values()):
-        st.markdown(f"<div style='padding:0 1rem 0.75rem 1rem;'>{status_badge('Models ready', 'green')}</div>", unsafe_allow_html=True)
-    else:
-        st.markdown(f"<div style='padding:0 1rem 0.75rem 1rem;'>{status_badge('Training required', 'amber')}</div>", unsafe_allow_html=True)
-
-    st.markdown("<div style='padding:0 1rem 0.45rem 1rem; color:#94A3B8; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:800;'>Navigation</div>", unsafe_allow_html=True)
-    sidebar_choice = st.radio(
-        "Navigation",
-        list(PAGE_LABELS.keys()),
-        format_func=lambda key: PAGE_LABELS[key],
-        label_visibility="collapsed",
-        index=0,
-    )
-    st.markdown(
-        """
-        <div class="sidebar-footer">
-            <div>Future Interns ML Task 2</div>
-            <div>Built with Python · scikit-learn · Streamlit</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-if artifact_errors:
-    st.warning(
-        "Some model files could not be loaded. Ticket prediction will be disabled until the artifacts are restored.\n\n"
-        + "\n".join(f"- {error}" for error in artifact_errors)
-    )
-
-
 def render_overview():
     dataset_rows = metric_value = None
     if dataset_info and dataset_info.get("df") is not None:
@@ -3263,6 +2517,61 @@ def render_page(page_name):
         render_dataset_explorer()
     elif page_name == "About Project":
         render_about_project()
+
+
+artifacts, artifact_errors = load_artifacts()
+report = load_report()
+dataset_info = load_dataset()
+
+
+if "triage_result" not in st.session_state:
+    st.session_state["triage_result"] = None
+if "ticket_input" not in st.session_state:
+    st.session_state["ticket_input"] = next(iter(SAMPLE_TICKETS.values()))
+
+
+with st.sidebar:
+    st.markdown(
+        f"""
+        <div class="sidebar-wrap">
+            <div class="badge badge-cyan" style="margin-bottom:0.9rem;">NLP Automation</div>
+            <div class="sidebar-title">{PROJECT_NAME}</div>
+            <div class="sidebar-subtitle">{PROJECT_TAGLINE}</div>
+            <div class="sidebar-desc">{PROJECT_SUBTITLE}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if all(artifacts.values()):
+        st.markdown(f"<div style='padding:0 1rem 0.75rem 1rem;'>{status_badge('Models ready', 'green')}</div>", unsafe_allow_html=True)
+    else:
+        st.markdown(f"<div style='padding:0 1rem 0.75rem 1rem;'>{status_badge('Training required', 'amber')}</div>", unsafe_allow_html=True)
+
+    st.markdown("<div style='padding:0 1rem 0.45rem 1rem; color:#94A3B8; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:800;'>Navigation</div>", unsafe_allow_html=True)
+    sidebar_choice = st.radio(
+        "Navigation",
+        list(PAGE_LABELS.keys()),
+        format_func=lambda key: PAGE_LABELS[key],
+        label_visibility="collapsed",
+        index=0,
+    )
+    st.markdown(
+        """
+        <div class="sidebar-footer">
+            <div>Future Interns ML Task 2</div>
+            <div>Built with Python · scikit-learn · Streamlit</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+if artifact_errors:
+    st.warning(
+        "Some model files could not be loaded. Ticket prediction will be disabled until the artifacts are restored.\n\n"
+        + "\n".join(f"- {error}" for error in artifact_errors)
+    )
 
 
 render_page(sidebar_choice)
