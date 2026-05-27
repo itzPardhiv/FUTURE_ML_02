@@ -7,6 +7,8 @@
 ![Plotly](https://img.shields.io/badge/Plotly-Interactive%20Charts-3f4f75)
 ![Joblib](https://img.shields.io/badge/Joblib-Model%20Artifacts-6f42c1)
 
+> A professional NLP-based support automation dashboard for ticket classification, priority prediction, SLA guidance, team routing, and first-response generation.
+
 AI Ticket Desk is a recruiter-ready NLP support automation project that upgrades Future Interns Machine Learning Internship Task 2 into a professional simulation of an enterprise IT helpdesk AI platform. It classifies support tickets, predicts priority, recommends SLA guidance, routes requests to the right team, and generates first-response drafts through a clean Streamlit dashboard.
 
 ## Business Problem
@@ -126,36 +128,76 @@ streamlit run app/app.py
 
 ## Screenshots
 
-![Dashboard Overview](visuals/dashboard-overview.png)
-![Ticket Triage Result](visuals/ticket-triage-result.png)
-![Model Performance](visuals/model-performance.png)
-![Dataset Explorer](visuals/dataset-explorer.png)
-![About Project](visuals/about-project.png)
+### Dashboard Overview
+<img src="visuals/dashboard_overview.png" width="850">
+
+The dashboard overview highlights dataset size, model accuracy, TF-IDF feature count, business value, category distribution, and priority distribution.
+
+### Ticket Triage
+<img src="visuals/ticket_triage_result.png" width="850">
+
+The ticket triage page analyzes a support request and displays the predicted category, priority level, SLA guidance, suggested support team, urgency explanation, and first-response draft.
+
+### Model Performance
+<img src="visuals/model_performance.png" width="850">
+
+The model performance page summarizes category accuracy, priority accuracy, dataset details, TF-IDF features, and classification reports.
+
+### Dataset Explorer
+<img src="visuals/dataset_explorer.png" width="850">
+
+The dataset explorer provides sample records, dataset shape, column information, category counts, and priority distribution insights.
+
+### About Project
+<img src="visuals/about_project.png" width="850">
+
+The about page explains the problem statement, machine learning workflow, technology stack, and expected business impact of the support automation system.
+
+## How to Use
+
+1. Install the required dependencies using `pip install -r requirements.txt`.
+2. Train the machine learning models using `python scripts/train_models.py`.
+3. Start the Streamlit dashboard using `streamlit run app/app.py`.
+4. Open the **Ticket Triage** page from the sidebar.
+5. Enter a support ticket description in the text box.
+6. Click **Analyze Ticket**.
+7. Review the predicted category, priority level, SLA guidance, suggested support team, urgency explanation, and generated first-response draft.
 
 ## Results and Business Impact
 
-- Reduces manual triage effort for support teams.
-- Improves consistency in ticket routing and prioritization.
-- Helps surface SLA-sensitive requests faster.
-- Produces a more professional first-touch experience for support users.
-- Demonstrates practical machine learning product thinking for recruiters.
+This project demonstrates how machine learning can support first-level IT helpdesk operations by reducing manual triage effort and improving ticket routing consistency.
+
+Key outcomes include:
+
+- Automatically classifies support tickets into relevant issue categories.
+- Predicts priority levels to support SLA-based decision-making.
+- Routes tickets to the appropriate support team using rule-based business logic.
+- Generates professional first-response drafts for faster support communication.
+- Provides an interactive dashboard for reviewing dataset insights and model performance.
+- Demonstrates practical NLP, machine learning, and product-thinking skills in an internship-level project.
+
+This project is designed as a professional simulation of an enterprise support automation workflow, not as a live production deployment.
 
 ## Future Improvements
 
-- Add richer explainability visuals for model decisions.
-- Include batch upload/export workflows for support operations.
-- Add more routing rules for department-specific queues.
-- Explore transformer-based text classification for future model iterations.
-- Add test coverage and simple CI checks for the training and app scripts.
+- Add model explainability using feature importance or LIME/SHAP-style explanations.
+- Include batch ticket upload and export functionality for support teams.
+- Add role-based dashboard views for agents, managers, and administrators.
+- Improve priority prediction using richer historical SLA or resolution-time data.
+- Experiment with transformer-based text classification models such as BERT.
+- Add automated testing for the training pipeline and Streamlit dashboard.
+- Deploy the Streamlit dashboard using Streamlit Community Cloud or another hosting platform.
 
 ## Author
 
 **A.J. Pardhiv**
 
-- AI & Data Science Student
-- Google Certified Data Analyst
-- Full-Stack Developer | Python & ML Enthusiast
+- AI & Data Science Student  
+- Google Certified Data Analyst  
+- Full-Stack Developer  
+- Python & Machine Learning Enthusiast  
+- Interested in AI, Data Science, NLP, and intelligent automation systems
 
 ## Closing Note
 
-This repository is an internship project upgraded into a professional simulation of an enterprise support automation platform. It is intentionally positioned as a recruiter-ready machine learning product demo rather than a claim of live production deployment.
+AI Ticket Desk is an internship machine learning project upgraded into a professional simulation of an enterprise IT support automation platform. It is intended to demonstrate practical NLP, model training, dashboard development, and business workflow design rather than claim real-world production deployment.
