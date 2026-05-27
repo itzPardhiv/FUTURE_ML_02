@@ -1,0 +1,106 @@
+{
+  "generated_timestamp": "2026-05-27T13:04:33",
+  "dataset_rows": 47837,
+  "text_column_used": "Document",
+  "category_column_used": "Topic_group",
+  "priority_source": "generated",
+  "tfidf_feature_count": 8260,
+  "category_accuracy": 0.8450041806020067,
+  "priority_accuracy": 0.9620610367892977,
+  "category_classification_report": {
+    "Access": {
+      "precision": 0.8803009575923393,
+      "recall": 0.9031578947368422,
+      "f1-score": 0.8915829580879807,
+      "support": 1425.0
+    },
+    "Administrative rights": {
+      "precision": 0.7282051282051282,
+      "recall": 0.8068181818181818,
+      "f1-score": 0.7654986522911051,
+      "support": 352.0
+    },
+    "HR Support": {
+      "precision": 0.8633776091081594,
+      "recall": 0.8337150710032066,
+      "f1-score": 0.8482871125611746,
+      "support": 2183.0
+    },
+    "Hardware": {
+      "precision": 0.8436055469953775,
+      "recall": 0.8039647577092511,
+      "f1-score": 0.8233082706766918,
+      "support": 2724.0
+    },
+    "Internal Project": {
+      "precision": 0.8200836820083682,
+      "recall": 0.9245283018867925,
+      "f1-score": 0.8691796008869179,
+      "support": 424.0
+    },
+    "Miscellaneous": {
+      "precision": 0.7907133243606999,
+      "recall": 0.8321529745042493,
+      "f1-score": 0.8109040717736369,
+      "support": 1412.0
+    },
+    "Purchase": {
+      "precision": 0.9123173277661796,
+      "recall": 0.8864097363083164,
+      "f1-score": 0.8991769547325104,
+      "support": 493.0
+    },
+    "Storage": {
+      "precision": 0.8787346221441125,
+      "recall": 0.9009009009009009,
+      "f1-score": 0.8896797153024911,
+      "support": 555.0
+    },
+    "accuracy": 0.8450041806020067,
+    "macro avg": {
+      "precision": 0.8396672747725455,
+      "recall": 0.8614559773584676,
+      "f1-score": 0.8497021670390635,
+      "support": 9568.0
+    },
+    "weighted avg": {
+      "precision": 0.8460665503180784,
+      "recall": 0.8450041806020067,
+      "f1-score": 0.8450103383907435,
+      "support": 9568.0
+    }
+  },
+  "priority_classification_report": {
+    "High": {
+      "precision": 0.9182978723404255,
+      "recall": 0.8932119205298014,
+      "f1-score": 0.9055812001678556,
+      "support": 1208.0
+    },
+    "Low": {
+      "precision": 0.9597849462365592,
+      "recall": 0.9913371834740116,
+      "f1-score": 0.9753059440559441,
+      "support": 4502.0
+    },
+    "Medium": {
+      "precision": 0.9786267699706118,
+      "recall": 0.9494556765163297,
+      "f1-score": 0.9638205499276411,
+      "support": 3858.0
+    },
+    "accuracy": 0.9620610367892977,
+    "macro avg": {
+      "precision": 0.9522365295158655,
+      "recall": 0.9446682601733808,
+      "f1-score": 0.9482358980504803,
+      "support": 9568.0
+    },
+    "weighted avg": {
+      "precision": 0.9621444122377553,
+      "recall": 0.9620610367892977,
+      "f1-score": 0.9618717737838074,
+      "support": 9568.0
+    }
+  }
+}
