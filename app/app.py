@@ -17,10 +17,10 @@ MODELS_DIR = ROOT_DIR / "models"
 DATA_PATH = ROOT_DIR / "data" / "all_tickets_processed_improved_v3.csv"
 REPORT_PATH = MODELS_DIR / "model_report.json"
 
-PROJECT_NAME = "AI Ticket Desk"
+PROJECT_NAME = "Ticket Desk"
 PROJECT_TAGLINE = "Support Intelligence Platform"
 PROJECT_SUBTITLE = "Intelligent triage, SLA guidance, and support workflow automation."
-PROJECT_DESCRIPTION = "A dark, premium, recruiter-ready support automation demo built with Python, Streamlit, and scikit-learn."
+PROJECT_DESCRIPTION = "A recruiter-ready support automation demo built with Python, Streamlit, and scikit-learn."
 
 PAGES = [
     "Dashboard Overview",
@@ -367,12 +367,12 @@ def prediction_payload(ticket_text, artifacts):
     summary = summarize_ticket(ticket_text, 220)
     response = (
         "Hello,\n\n"
-        f"Thank you for contacting the AI Ticket Desk. We have reviewed your request and classified it as {predicted_category}. "
+        f"Thank you for contacting support. We have reviewed your request and classified it as {predicted_category}. "
         f"It has been routed to {team}. Current priority: {predicted_priority}. SLA guidance: {sla['guidance']} "
         "Our team will continue reviewing the issue and provide the next update within the expected response window.\n\n"
         f"Ticket summary: {summary}\n\n"
         "Best regards,\n"
-        "AI Ticket Desk Support Team"
+        "Support Team"
     )
     return {
         "ticket_text": ticket_text,
@@ -864,7 +864,7 @@ def render_overview(report, dataset_info):
 
     page_hero(
         "Support Intelligence Dashboard",
-        "Monitor ticket distribution, model performance, and AI triage readiness from one workspace.",
+        "Monitor ticket distribution, model performance, and automated triage readiness from one workspace.",
         badge=status_badge("NLP Automation System", "cyan"),
     )
 
@@ -923,7 +923,7 @@ def render_overview(report, dataset_info):
 def render_ticket_triage(artifacts):
     page_hero(
         "Ticket Triage",
-        "Paste a support request, run the analysis, and turn messy ticket text into a structured AI triage report.",
+        "Paste a support request, run the analysis, and turn messy ticket text into a structured triage report.",
         badge=status_badge("Real-time NLP", "cyan"),
     )
 
@@ -970,7 +970,7 @@ def render_ticket_triage(artifacts):
         result = st.session_state.get("last_analysis")
         if not result:
             empty_state(
-                "AI triage report will appear here",
+                "Triage report will appear here",
                 "Run an analysis to view the predicted category, priority, SLA target, routing team, urgency note, and response draft.",
             )
         else:
@@ -981,7 +981,7 @@ def render_ticket_triage(artifacts):
                 <div class="report-card">
                     <div class="analysis-header">
                         <div>
-                            <div class="analysis-title">AI Triage Report</div>
+                            <div class="analysis-title">Triage Report</div>
                             <div class="analysis-subtitle">Completed analysis for the submitted support ticket.</div>
                         </div>
                         <div class="status-line">
@@ -1191,10 +1191,10 @@ def render_dataset_explorer():
 
 
 def render_about_project():
-    page_hero("AI Ticket Desk", "A professional simulation of an enterprise support automation platform.", badge=status_badge("Product Case Study", "cyan"))
+    page_hero("Ticket Desk", "A professional simulation of an enterprise support automation platform.", badge=status_badge("Product Case Study", "cyan"))
     divider()
     section_header("Problem Statement", "Support teams receive a constant stream of tickets that need to be categorized, prioritized, routed, and acknowledged quickly.")
-    glass_card("Problem Statement", "Manual triage slows resolution, increases SLA risk, and makes support operations harder to scale. AI Ticket Desk introduces a streamlined NLP workflow that gives support leaders a faster and more consistent operating model.")
+    glass_card("Problem Statement", "Manual triage slows resolution, increases SLA risk, and makes support operations harder to scale. This project introduces a streamlined NLP workflow that gives support leaders a faster and more consistent operating model.")
     divider()
     section_header("Solution Overview", "The platform uses lightweight text classification plus business rules to deliver structured support guidance.")
     glass_card("Solution Overview", "Tickets are cleaned, vectorized with TF-IDF, classified into support categories, prioritized for SLA handling, routed to the appropriate team, and converted into a first-response draft for faster customer communication.")
@@ -1254,10 +1254,10 @@ def render_about_project():
             f"""
             <div class="card premium-card" style="height:100%; align-items:flex-start;">
                 <div class="profile-avatar" aria-hidden="true"></div>
-                <div class="profile-meta">
+                    <div class="profile-meta">
                     <div class="name">A.J. Pardhiv</div>
                     <div class="title">AI & Data Science Student</div>
-                    <div class="profile-bio">Google Certified Data Analyst building recruiter-ready AI and Streamlit products with practical NLP, analytics, and interface polish.</div>
+                    <div class="profile-bio">Google Certified Data Analyst building recruiter-ready Streamlit products with practical NLP, analytics, and interface polish.</div>
                     <div style="margin-top:0.65rem;">{status_badge('Google Certified Data Analyst', 'cyan')}</div>
                 </div>
             </div>

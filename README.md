@@ -1,203 +1,746 @@
-# AI Ticket Desk — Support Intelligence Platform
+# 🚀 Ticket Desk — Support Intelligence Platform
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)
-![scikit--learn](https://img.shields.io/badge/scikit--learn-ML%20Pipeline-orange)
-![Pandas](https://img.shields.io/badge/Pandas-Data%20Handling-150458)
-![Plotly](https://img.shields.io/badge/Plotly-Interactive%20Charts-3f4f75)
-![Joblib](https://img.shields.io/badge/Joblib-Model%20Artifacts-6f42c1)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-AI%20Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Scikit Learn](https://img.shields.io/badge/scikit--learn-Machine%20Learning-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![NLP](https://img.shields.io/badge/NLP-Ticket%20Automation-6A5ACD?style=for-the-badge)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-Business%20Visuals-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-> A professional NLP-based support automation dashboard for ticket classification, priority prediction, SLA guidance, team routing, and first-response generation.
+---
 
-AI Ticket Desk is a recruiter-ready NLP support automation project that upgrades Future Interns Machine Learning Internship Task 2 into a professional simulation of an enterprise IT helpdesk AI platform. It classifies support tickets, predicts priority, recommends SLA guidance, routes requests to the right team, and generates first-response drafts through a clean Streamlit dashboard.
+## Project Status
 
-## Business Problem
+This project is actively maintained and improved as part of my machine learning, NLP, and intelligent automation portfolio.
 
-Support teams often receive large volumes of unstructured tickets that must be triaged quickly. Manual classification, prioritization, and routing slows down response times, introduces inconsistency, and makes it harder to identify SLA risks early.
+**Status:** Professional Internship Simulation ✅
+**Focus Area:** NLP, Support Automation, Ticket Classification, Priority Prediction, Streamlit Dashboard
+**Current Version:** 1.0.0
+**Last Updated:** May 2026
 
-## Project Objective
+---
 
-The objective of this project is to automate first-line ticket triage with machine learning so that support requests can be categorized, prioritized, and routed more efficiently while still producing a professional and explainable workflow for stakeholders.
+## 📊 Overview
 
-## Key Features
+**Ticket Desk — Support Intelligence Platform** is a professional NLP-based support automation dashboard designed to simulate an enterprise IT helpdesk intelligence system.
 
-- Ticket category classification with a LinearSVC model.
-- Ticket priority prediction with Logistic Regression.
-- SLA guidance based on predicted urgency.
-- Rule-based support team routing.
-- Professional first-response draft generation.
-- Clean Streamlit dashboard with multiple pages.
-- Dataset explorer and model performance views.
-- Beginner-friendly launcher and health checker in `main.py`.
+The platform automates first-level support ticket triage by classifying incoming tickets, predicting priority, recommending SLA guidance, routing tickets to the appropriate support team, and generating professional first-response drafts.
 
-## Dataset
+This project upgrades a machine learning internship task into a complete business-facing product simulation that combines **NLP, machine learning, dashboard design, workflow automation, and stakeholder-friendly insights**.
 
-- File: `data/all_tickets_processed_improved_v3.csv`
-- Size: around 47,837 rows
-- Main text column: `Document`
-- Main category column: `Topic_group`
-- Priority labels are either taken from the dataset or generated using rule-based keyword logic when needed.
+**Built for:** IT support teams, helpdesk managers, business analysts, recruiters, and ML project reviewers
+**Use case:** Ticket classification, priority prediction, SLA guidance, support routing, and response automation
 
-## Machine Learning Workflow
+---
 
-1. Load and validate the dataset.
-2. Detect the text and category columns automatically.
-3. Clean support ticket text.
-4. Generate priority labels when the source column is unavailable.
-5. Transform text using a TF-IDF vectorizer.
-6. Train a LinearSVC model for category prediction.
-7. Train a Logistic Regression model for priority prediction.
-8. Evaluate models using a train/test split.
-9. Save model artifacts and a JSON training report.
-10. Load the saved artifacts in the Streamlit dashboard for interactive analysis.
+## 🎯 Business Problem
 
-## Model Performance
+Support teams receive large volumes of unstructured tickets every day. These tickets often need to be manually read, categorized, prioritized, assigned, and responded to.
 
-The saved local training report shows strong support triage performance:
+This manual process can create several problems:
 
-- Category accuracy: approximately 84.5% to 85%+
-- Priority accuracy: approximately 96% to 97%
-- TF-IDF features: 10,000 configured in the training pipeline
+* Slow first response times
+* Inconsistent ticket prioritization
+* Incorrect team routing
+* Higher SLA risk
+* More repetitive work for support agents
+* Limited visibility into ticket distribution and support workload
 
-These results make the project suitable as a realistic internship simulation rather than a production deployment claim.
+**Ticket Desk** addresses this problem by using machine learning to assist the first stage of ticket triage and convert raw support requests into structured, actionable support decisions.
 
-## Dashboard Features
+---
 
-The Streamlit app at `app/app.py` includes:
+## 🧠 Project Objective
 
-- Dashboard Overview with KPI cards and distribution charts.
-- Ticket Triage for interactive prediction and response drafting.
-- Model Performance for accuracy and classification report review.
-- Dataset Explorer for sample rows, filters, and distribution analysis.
-- About Project for a concise business and ML summary.
+The objective of this project is to build an intelligent support triage system that can:
 
-## Project Structure
+* Understand raw support ticket descriptions
+* Predict the most likely ticket category
+* Estimate the ticket priority level
+* Recommend SLA guidance
+* Suggest the correct support team
+* Generate a professional first-response draft
+* Present ticket and model insights through an interactive dashboard
+
+The goal is not just to train a model, but to demonstrate how machine learning can be converted into a practical business workflow.
+
+---
+
+## ✨ Core Features
+
+### 🎫 Intelligent Ticket Classification
+
+* Classifies support tickets into relevant issue categories.
+* Uses a trained **LinearSVC** model for category prediction.
+* Converts ticket text into numerical features using **TF-IDF Vectorization**.
+* Handles real-world unstructured support ticket descriptions.
+* Supports saved model loading for interactive dashboard inference.
+
+---
+
+### 🚦 Priority Prediction
+
+* Predicts ticket urgency as **Low**, **Medium**, or **High**.
+* Uses a **Logistic Regression** model for priority classification.
+* Supports rule-based fallback priority generation when source priority labels are unavailable.
+* Helps support teams identify tickets that may require faster attention.
+* Provides a foundation for SLA-aware support workflows.
+
+---
+
+### 🧭 SLA Guidance
+
+* Maps predicted priority to practical SLA recommendations.
+* Helps determine how urgently a ticket should be handled.
+* Gives business-friendly explanations for support decision-making.
+* Makes the dashboard useful for both technical and non-technical users.
+
+---
+
+### 🏢 Support Team Routing
+
+* Suggests the most suitable support team based on predicted category.
+* Reduces misrouting and repeated manual review.
+* Simulates real helpdesk assignment logic.
+* Connects machine learning output with business process automation.
+
+---
+
+### 💬 First-Response Draft Generation
+
+* Generates a professional first-response message for support agents.
+* Uses predicted category and priority to create a contextual reply.
+* Helps reduce repetitive communication work.
+* Demonstrates how the system can assist support communication without fully replacing human agents.
+
+---
+
+### 📈 Interactive Streamlit Dashboard
+
+The dashboard includes multiple business-focused pages:
+
+* **Dashboard Overview**
+* **Ticket Triage**
+* **Model Performance**
+* **Dataset Explorer**
+* **About Project**
+
+Each page is designed to present ML results in a way that recruiters, managers, and non-technical stakeholders can understand.
+
+---
+
+## 📸 Dashboard Preview
+
+Screenshots can be added inside the `visuals/` folder.
 
 ```text
-AI-Ticket-Desk-Support-Intelligence-Platform/
-├── app/
-│   └── app.py
-├── data/
-│   └── all_tickets_processed_improved_v3.csv
-├── models/
-│   ├── category_model.pkl
-│   ├── model_report.json
-│   ├── priority_model.pkl
-│   └── tfidf_vectorizer.pkl
-├── notebooks/
-│   └── 01_ticket_classification_model.ipynb
-├── scripts/
-│   └── train_models.py
-├── visuals/
-├── main.py
-├── README.md
-└── requirements.txt
+┌───────────────────────────────────────────────────────────────┐
+│        Ticket Desk — Support Intelligence Platform          │
+│                                                               │
+│  📊 Dashboard Overview                                        │
+│  ├─ Total Tickets: 47,837                                     │
+│  ├─ Category Accuracy: ~85%                                   │
+│  ├─ Priority Accuracy: ~96%                                   │
+│  └─ TF-IDF Features: 10,000                                   │
+│                                                               │
+│  🎫 Ticket Triage                                             │
+│  ├─ User enters support ticket description                    │
+│  ├─ System predicts issue category                            │
+│  ├─ System predicts ticket priority                           │
+│  ├─ SLA guidance is generated                                 │
+│  ├─ Support team is recommended                               │
+│  └─ First-response draft is created                           │
+│                                                               │
+│  📈 Model Performance                                         │
+│  ├─ Accuracy metrics                                          │
+│  ├─ Classification reports                                    │
+│  └─ Training summary                                          │
+│                                                               │
+│  🔍 Dataset Explorer                                          │
+│  ├─ Sample ticket records                                     │
+│  ├─ Category distribution                                     │
+│  └─ Priority distribution                                     │
+│                                                               │
+│  💼 Business Intelligence                                     │
+│  └─ Faster triage, better routing, SLA-aware decisions         │
+└───────────────────────────────────────────────────────────────┘
 ```
 
-## Installation
+---
 
-### 1. Create a virtual environment
+## 🖼️ Screenshots
 
-```powershell
+### Dashboard Overview
+
+```text
+visuals/dashboard_overview.png
+```
+
+The dashboard overview highlights the dataset size, model accuracy, TF-IDF feature count, business value, category distribution, and priority distribution.
+
+---
+
+### Ticket Triage
+
+```text
+visuals/ticket_triage.png
+```
+
+The ticket triage page allows users to enter a support ticket and receive the predicted category, priority level, SLA guidance, suggested support team, urgency explanation, and first-response draft.
+
+---
+
+### Model Performance
+
+```text
+visuals/model_performance.png
+```
+
+The model performance page summarizes category accuracy, priority accuracy, dataset details, TF-IDF feature configuration, and classification reports.
+
+---
+
+### Dataset Explorer
+
+```text
+visuals/dataset_explorer.png
+```
+
+The dataset explorer provides sample records, dataset shape, column details, category counts, and priority distribution insights.
+
+---
+
+### About Project
+
+```text
+visuals/about_project.png
+```
+
+The about page explains the business problem, machine learning workflow, technology stack, and expected business impact of the support automation system.
+
+---
+
+## 🏗️ Architecture
+
+### NLP Support Automation Pipeline
+
+```text
+Support Ticket Dataset
+        ↓
+   Data Loading & Validation
+   ├─ Load CSV dataset
+   ├─ Detect text column
+   ├─ Detect category column
+   └─ Validate required fields
+        ↓
+   Text Preprocessing
+   ├─ Clean raw ticket text
+   ├─ Normalize ticket descriptions
+   └─ Prepare labels
+        ↓
+   Feature Engineering
+   ├─ TF-IDF Vectorization
+   ├─ 10,000 configured features
+   └─ Train/test split
+        ↓
+   Model Training
+   ├─ LinearSVC for category classification
+   ├─ Logistic Regression for priority prediction
+   └─ Rule-based priority fallback
+        ↓
+   Model Evaluation
+   ├─ Accuracy scores
+   ├─ Classification reports
+   └─ JSON training report
+        ↓
+   Model Persistence
+   ├─ category_model.pkl
+   ├─ priority_model.pkl
+   ├─ tfidf_vectorizer.pkl
+   └─ model_report.json
+        ↓
+   Streamlit Dashboard
+   ├─ Dashboard overview
+   ├─ Ticket triage
+   ├─ SLA guidance
+   ├─ Team routing
+   ├─ Response generation
+   └─ Dataset/model insights
+```
+
+---
+
+## Module Structure
+
+| Module                  | Purpose                                             |
+| ----------------------- | --------------------------------------------------- |
+| Data Loading            | Loads and validates the support ticket dataset      |
+| Text Cleaning           | Prepares raw ticket descriptions for NLP processing |
+| Feature Engineering     | Converts ticket text into TF-IDF features           |
+| Category Classification | Predicts ticket category using LinearSVC            |
+| Priority Prediction     | Predicts urgency level using Logistic Regression    |
+| SLA Guidance            | Converts priority into response-time guidance       |
+| Team Routing            | Recommends the most suitable support team           |
+| Response Generator      | Creates professional first-response drafts          |
+| Dashboard               | Provides interactive Streamlit pages for analysis   |
+| Model Storage           | Saves and loads ML artifacts using Joblib           |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer               | Technology          | Purpose                                  |
+| ------------------- | ------------------- | ---------------------------------------- |
+| Frontend            | Streamlit           | Interactive dashboard and user interface |
+| Visualization       | Plotly              | Business charts and distribution visuals |
+| NLP Features        | TF-IDF Vectorizer   | Text-to-feature transformation           |
+| Category Model      | LinearSVC           | Support ticket category classification   |
+| Priority Model      | Logistic Regression | Ticket urgency prediction                |
+| Data Processing     | Pandas              | Dataset loading, cleaning, and analysis  |
+| Numerical Computing | NumPy               | Array operations and ML support          |
+| Model Storage       | Joblib              | Saving and loading trained artifacts     |
+| Backend             | Python 3.11+        | Core runtime and ML pipeline             |
+
+---
+
+## 📁 Project Structure
+
+```text
+Ticket-Desk-Support-Intelligence-Platform/
+├── 📄 README.md
+├── 📋 requirements.txt
+├── 📄 main.py
+│
+├── 📂 app/
+│   └── app.py
+│
+├── 📂 data/
+│   └── all_tickets_processed_improved_v3.csv
+│
+├── 📂 models/
+│   ├── category_model.pkl
+│   ├── priority_model.pkl
+│   ├── tfidf_vectorizer.pkl
+│   └── model_report.json
+│
+├── 📂 notebooks/
+│   └── 01_ticket_classification_model.ipynb
+│
+├── 📂 scripts/
+│   └── train_models.py
+│
+└── 📂 visuals/
+    ├── dashboard_overview.png
+    ├── ticket_triage.png
+    ├── model_performance.png
+    ├── dataset_explorer.png
+    └── about_project.png
+```
+
+---
+
+## ⚙️ Installation
+
+### Prerequisites
+
+* Python 3.11 or higher
+* Windows, macOS, or Linux
+* pip package manager
+* Terminal or PowerShell access
+
+---
+
+## Quick Start
+
+### 1. Clone or download the repository
+
+```bash
+cd Ticket-Desk-Support-Intelligence-Platform
+```
+
+### 2. Create a virtual environment
+
+```bash
 python -m venv .venv
 ```
 
-### 2. Activate it on Windows PowerShell
+### 3. Activate the virtual environment
+
+On Windows PowerShell:
 
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+On macOS/Linux:
 
-```powershell
+```bash
+source .venv/bin/activate
+```
+
+### 4. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Training Command
+### 5. Train the machine learning models
 
-```powershell
+```bash
 python scripts/train_models.py
 ```
 
-## Run the Dashboard
+### 6. Run the Streamlit dashboard
 
-```powershell
+```bash
 streamlit run app/app.py
 ```
 
-## Screenshots
+### 7. Open the app in your browser
 
-### Dashboard Overview
-<img src="visuals/dashboard_overview.png" width="850">
+```text
+Local URL: http://localhost:8501
+```
 
-The dashboard overview highlights dataset size, model accuracy, TF-IDF feature count, business value, category distribution, and priority distribution.
+---
 
-### Ticket Triage
-<img src="visuals/ticket_triage.png" width="850">
+## 📊 Usage Guide
 
-The ticket triage page analyzes a support request and displays the predicted category, priority level, SLA guidance, suggested support team, urgency explanation, and first-response draft.
+### Dashboard Pages
 
-### Model Performance
-<img src="visuals/model_performance.png" width="850">
+| Page               | Description                                                                             |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| Dashboard Overview | Displays KPIs, dataset size, model summary, and distributions                           |
+| Ticket Triage      | Accepts a ticket description and returns category, priority, SLA, team, and reply draft |
+| Model Performance  | Shows accuracy metrics and classification reports                                       |
+| Dataset Explorer   | Allows users to inspect records, columns, and label distributions                       |
+| About Project      | Explains the business problem, ML workflow, stack, and expected impact                  |
 
-The model performance page summarizes category accuracy, priority accuracy, dataset details, TF-IDF features, and classification reports.
+---
+
+## 🎫 Ticket Triage Workflow
+
+1. Open the Streamlit dashboard.
+2. Go to the **Ticket Triage** page.
+3. Enter a support ticket description.
+4. Click **Analyze Ticket**.
+5. Review the predicted category.
+6. Review the predicted priority.
+7. Check the SLA guidance.
+8. Check the suggested support team.
+9. Read the urgency explanation.
+10. Use or edit the generated first-response draft.
+
+---
+
+## 🧠 Machine Learning Workflow
+
+### Category Classification
+
+The category model uses:
+
+* TF-IDF Vectorizer
+* LinearSVC classifier
+* Train/test split evaluation
+* Classification report output
+* Saved model artifact for dashboard inference
+
+### Priority Prediction
+
+The priority model uses:
+
+* Logistic Regression
+* Dataset priority labels when available
+* Rule-based keyword priority generation when priority labels are unavailable
+* Saved model artifact for dashboard inference
+
+---
+
+## 📈 Model Performance
+
+The saved local training report shows strong internship-level NLP triage performance.
+
+| Metric            | Result                      |
+| ----------------- | --------------------------- |
+| Category Accuracy | Approximately 84.5% to 85%+ |
+| Priority Accuracy | Approximately 96% to 97%    |
+| TF-IDF Features   | 10,000                      |
+| Dataset Size      | Around 47,837 rows          |
+| Category Model    | LinearSVC                   |
+| Priority Model    | Logistic Regression         |
+
+> These results make the project suitable as a realistic machine learning internship simulation rather than a production deployment claim.
+
+---
+
+## 💼 Business Impact
+
+### Faster Ticket Triage
+
+* Automatically classifies incoming support tickets.
+* Reduces manual review for first-line support teams.
+* Helps agents understand the issue type faster.
+
+### Better Priority Handling
+
+* Predicts urgency levels to support SLA-aware decisions.
+* Helps identify high-priority tickets earlier.
+* Improves consistency in ticket prioritization.
+
+### Smarter Team Routing
+
+* Recommends appropriate support teams based on the predicted issue.
+* Reduces misrouted tickets and repeated manual assignment.
+* Simulates real-world helpdesk assignment logic.
+
+### Improved Support Communication
+
+* Generates professional first-response drafts.
+* Helps support agents respond faster.
+* Maintains consistent communication tone.
+
+### Recruiter-Ready ML Project
+
+* Shows end-to-end machine learning implementation.
+* Combines NLP, classification, dashboarding, and business logic.
+* Demonstrates product thinking beyond basic model training.
+
+---
+
+## 🚀 Advanced Features
+
+### Model Persistence
+
+* Category model saves to `models/category_model.pkl`
+* Priority model saves to `models/priority_model.pkl`
+* TF-IDF vectorizer saves to `models/tfidf_vectorizer.pkl`
+* Training report saves to `models/model_report.json`
+
+### Health Checker
+
+The project includes a beginner-friendly `main.py` launcher and health checker to verify:
+
+* Required files
+* Dataset availability
+* Model artifacts
+* Project folder structure
 
 ### Dataset Explorer
-<img src="visuals/dataset_explorer.png" width="850">
 
-The dataset explorer provides sample records, dataset shape, column information, category counts, and priority distribution insights.
+The dashboard includes dataset-level review features such as:
 
-### About Project
-<img src="visuals/about_project.png" width="850">
+* Sample ticket records
+* Dataset shape
+* Column information
+* Category distribution
+* Priority distribution
 
-The about page explains the problem statement, machine learning workflow, technology stack, and expected business impact of the support automation system.
+---
 
-## How to Use
+## 🔮 Future Roadmap
 
-1. Install the required dependencies using `pip install -r requirements.txt`.
-2. Train the machine learning models using `python scripts/train_models.py`.
-3. Start the Streamlit dashboard using `streamlit run app/app.py`.
-4. Open the **Ticket Triage** page from the sidebar.
-5. Enter a support ticket description in the text box.
-6. Click **Analyze Ticket**.
-7. Review the predicted category, priority level, SLA guidance, suggested support team, urgency explanation, and generated first-response draft.
+### Phase 2: Model Explainability
 
-## Results and Business Impact
+* Add feature importance for ticket predictions
+* Add LIME or SHAP-style explanations
+* Show top words influencing category and priority predictions
 
-This project demonstrates how machine learning can support first-level IT helpdesk operations by reducing manual triage effort and improving ticket routing consistency.
+### Phase 3: Workflow Automation
 
-Key outcomes include:
+* Add batch ticket upload
+* Add CSV export for analyzed tickets
+* Add support queue simulation
+* Add ticket assignment history
 
-- Automatically classifies support tickets into relevant issue categories.
-- Predicts priority levels to support SLA-based decision-making.
-- Routes tickets to the appropriate support team using rule-based business logic.
-- Generates professional first-response drafts for faster support communication.
-- Provides an interactive dashboard for reviewing dataset insights and model performance.
-- Demonstrates practical NLP, machine learning, and product-thinking skills in an internship-level project.
+### Phase 4: Advanced NLP
 
-This project is designed as a professional simulation of an enterprise support automation workflow, not as a live production deployment.
+* Experiment with transformer-based models such as BERT
+* Add semantic similarity for duplicate ticket detection
+* Add intent detection and sentiment analysis
+* Add multilingual ticket support
 
-## Future Improvements
+### Phase 5: Enterprise Features
 
-- Add model explainability using feature importance or LIME/SHAP-style explanations.
-- Include batch ticket upload and export functionality for support teams.
-- Add role-based dashboard views for agents, managers, and administrators.
-- Improve priority prediction using richer historical SLA or resolution-time data.
-- Experiment with transformer-based text classification models such as BERT.
-- Add automated testing for the training pipeline and Streamlit dashboard.
-- Deploy the Streamlit dashboard using Streamlit Community Cloud or another hosting platform.
+* Role-based views for agents, managers, and admins
+* SLA breach alerts
+* Team workload analytics
+* Resolution-time prediction
+* Cloud deployment using Streamlit Community Cloud or another hosting platform
 
-## Author
+---
+
+## 📈 Performance & Benchmarks
+
+| Metric            | Value                 |
+| ----------------- | --------------------- |
+| Dataset Size      | Around 47,837 tickets |
+| Category Accuracy | ~84.5% to 85%+        |
+| Priority Accuracy | ~96% to 97%           |
+| TF-IDF Features   | 10,000                |
+| Category Model    | LinearSVC             |
+| Priority Model    | Logistic Regression   |
+
+---
+
+## 🐛 Troubleshooting
+
+### Streamlit App Not Found
+
+Issue:
+
+```bash
+Error: Invalid value: File does not exist: app/app.py
+```
+
+Solution:
+
+Make sure you are inside the project root folder.
+
+```bash
+cd Ticket-Desk-Support-Intelligence-Platform
+streamlit run app/app.py
+```
+
+---
+
+### Models Not Found
+
+Issue:
+
+```text
+category_model.pkl not found
+```
+
+Solution:
+
+Train the models first.
+
+```bash
+python scripts/train_models.py
+```
+
+---
+
+### Virtual Environment Activation Error
+
+Issue:
+
+```text
+running scripts is disabled on this system
+```
+
+Solution for Windows PowerShell:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.venv\Scripts\Activate.ps1
+```
+
+---
+
+### Missing Dependencies
+
+Issue:
+
+```text
+ModuleNotFoundError
+```
+
+Solution:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 📚 Learning Resources
+
+* Streamlit Documentation: https://docs.streamlit.io/
+* Scikit-Learn Documentation: https://scikit-learn.org/stable/
+* Pandas Documentation: https://pandas.pydata.org/docs/
+* Plotly Python Documentation: https://plotly.com/python/
+* TF-IDF Vectorizer Guide: https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
+
+---
+
+## 📧 Support & Contributing
+
+### Questions?
+
+Open an issue on GitHub or contact the project maintainer.
+
+### Want to Contribute?
+
+1. Fork the repository.
+2. Create a feature branch.
+
+```bash
+git checkout -b feature/your-feature
+```
+
+3. Commit your changes.
+
+```bash
+git commit -m "Add your feature"
+```
+
+4. Push to the branch.
+
+```bash
+git push origin feature/your-feature
+```
+
+5. Open a Pull Request.
+
+---
+
+## 👨‍💼 About the Author
 
 **A.J. Pardhiv**
 
-- AI & Data Science Student  
-- Google Certified Data Analyst  
-- Full-Stack Developer  
-- Python & Machine Learning Enthusiast  
-- Interested in AI, Data Science, NLP, and intelligent automation systems
+AI & Data Science Student
+Google Certified Data Analyst
+Full-Stack Developer
+Python & Machine Learning Enthusiast
+Interested in AI, Data Science, NLP, and intelligent automation systems
 
-## Closing Note
+### Connect With Me
 
-AI Ticket Desk is an internship machine learning project upgraded into a professional simulation of an enterprise IT support automation platform. It is intended to demonstrate practical NLP, model training, dashboard development, and business workflow design rather than claim real-world production deployment.
+GitHub: [@itzPardhiv](https://github.com/itzPardhiv)
+LinkedIn: [A.J. Pardhiv](https://www.linkedin.com/in/aj-pardhiv-406a40333)
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🙏 Acknowledgments
+
+* Scikit-Learn — Machine learning algorithms and TF-IDF vectorization
+* Streamlit — Interactive dashboard framework
+* Pandas — Data processing and analysis
+* Plotly — Professional dashboard visualizations
+* Joblib — Model serialization and loading
+* Future Interns — Internship task inspiration and project structure
+
+---
+
+## ⭐ Show Your Support
+
+If you find this project useful, please consider:
+
+* ⭐ Starring this repository
+* 🔗 Sharing it with your network
+* 📝 Suggesting improvements
+* 💬 Giving feedback for future enhancements
+
+---
+
+**Last Updated:** May 2026
+**Version:** 1.0.0
+**Status:** Professional Internship Simulation ✅

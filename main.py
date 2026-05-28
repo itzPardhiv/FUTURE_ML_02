@@ -32,7 +32,7 @@ def format_status(exists):
 
 def print_banner():
     print("=" * 72)
-    print("AI Ticket Desk — Support Intelligence Platform")
+    print("Ticket Desk — Support Intelligence Platform")
     print("Project Launcher and Health Checker")
     print("=" * 72)
 
@@ -114,7 +114,7 @@ def main():
     print_next_steps()
 
     print("\nStatus complete.")
-    print("Built for AI Ticket Desk — Support Intelligence Platform")
+    print("Built for Ticket Desk — Support Intelligence Platform")
 
 
 if __name__ == "__main__":

@@ -153,7 +153,7 @@ def build_model_report(
 
 
 def main():
-    print("AI Ticket Desk - Support Intelligence Platform")
+    print("Ticket Desk - Support Intelligence Platform")
     print("=" * 52)
     print("Loading dataset...")
 
